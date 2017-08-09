@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/everypolitician/compare_with_wikidata
-  revision: aea3099d4b243254c8a8e99ff86925f21d47fa1b
-  branch: refactor-not-just-cli
+  revision: 76394fb513f685cd53f6e2150e9c6fa5a0869c77
+  branch: master
   specs:
     compare_with_wikidata (0.1.0)
       daff (>= 1.3)
