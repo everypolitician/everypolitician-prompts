@@ -2,6 +2,8 @@ require 'bundler/setup'
 require 'compare_with_wikidata'
 require 'sinatra'
 
+include CompareWithWikidata
+
 get '/' do
   mediawiki_site = params[:mediawiki_site]
   page_title = params[:page_title]
@@ -9,9 +11,7 @@ get '/' do
   halt "Please provide ?mediawiki_site and ?page_title GET parameters" unless mediawiki_site && page_title
 
   begin
-    page = CompareWithWikidata::MediawikiPage.new(mediawiki_site: mediawiki_site, page_title: page_title)
-    wikitext = CompareWithWikidata::MediawikiText.new(mediawiki_page: page)
-    page.replace_output(wikitext)
+    compare_with_wikidata(mediawiki_site, page_title)
   rescue => e
     halt "Error: #{e.message}"
   end
