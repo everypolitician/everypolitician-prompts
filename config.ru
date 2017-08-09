@@ -2,7 +2,7 @@ require 'bundler/setup'
 require 'compare_with_wikidata'
 require 'sinatra'
 
-include CompareWithWikidata
+Sinatra::Application.include CompareWithWikidata
 
 get '/' do
   mediawiki_site = params[:mediawiki_site]
