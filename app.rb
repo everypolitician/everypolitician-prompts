@@ -1,6 +1,4 @@
 require 'bundler/setup'
-require 'compare_with_wikidata'
-require 'sinatra'
 require 'yaml'
 
 begin
@@ -10,6 +8,9 @@ begin
 rescue Errno::ENOENT
   abort "Please run 'cp secrets.yml-example secrets.yml' and then fill out secrets.yml"
 end
+
+require 'compare_with_wikidata'
+require 'sinatra'
 
 get '/' do
   redirect to('/prompter')
