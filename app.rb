@@ -3,6 +3,10 @@ require 'compare_with_wikidata'
 require 'sinatra'
 
 get '/' do
+  redirect to('/prompter')
+end
+
+get '/prompter' do
   mediawiki_site = params[:mediawiki_site]
   page_title = params[:page_title]
 
