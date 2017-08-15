@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+bundle exec rackup -p "${PORT:-8000}" -E "${RACK_ENV:-development}" -o 0.0.0.0

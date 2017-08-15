@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Make sure we're in the correct directory
+cd "$(dirname "$0")/.."
+
+# Add custom Ruby version to PATH
+export PATH="$HOME/ruby-2.4.1/bin:$PATH"
+
+# Install latest dependencies
+bundle install --deployment --without development test --path vendor -j 3
+
+# Start the rack server
+RACK_ENV=production ./script/server
