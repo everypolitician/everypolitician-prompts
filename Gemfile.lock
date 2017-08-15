@@ -1,12 +1,11 @@
 GIT
   remote: https://github.com/everypolitician/compare_with_wikidata
-  revision: 9dbc41e5ca845b8fbb603d030392f6304e15aaf1
+  revision: 73b9c712299110cc71813616d9679b47db0b76d8
   branch: master
   specs:
     compare_with_wikidata (0.1.0)
       daff (>= 1.3)
-      everypolitician (>= 0.20)
-      mediawiki-page-replaceable_content
+      mediawiki_api (~> 0.7)
       rest-client (~> 2.0)
 
 GEM
@@ -15,12 +14,7 @@ GEM
     daff (1.3.19)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
-    everypolitician (0.20.0)
-      everypolitician-popolo (>= 0.8.0)
-      require_all
-    everypolitician-popolo (0.8.0)
-      require_all
-    faraday (0.12.2)
+    faraday (0.13.0)
       multipart-post (>= 1.2, < 3)
     faraday-cookie_jar (0.0.6)
       faraday (>= 0.7.4)
@@ -29,8 +23,6 @@ GEM
       faraday (>= 0.7.4, < 1.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    mediawiki-page-replaceable_content (0.1.1)
-      mediawiki_api (~> 0.7)
     mediawiki_api (0.7.1)
       faraday (~> 0.9, >= 0.9.0)
       faraday-cookie_jar (~> 0.0, >= 0.0.6)
@@ -45,7 +37,6 @@ GEM
     rack (2.0.3)
     rack-protection (2.0.0)
       rack
-    require_all (1.4.0)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
