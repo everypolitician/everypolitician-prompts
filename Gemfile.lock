@@ -1,19 +1,19 @@
 GIT
   remote: https://github.com/everypolitician/compare_with_wikidata
-  revision: c887a092fe08626dab5aa4f5c2ed68279d21b128
+  revision: d8d3d9a94f45bcd6457bb69ff932215e9ce9716e
   branch: master
   specs:
     compare_with_wikidata (0.1.0)
-      daff (>= 1.3)
+      everypolitician-daff (>= 1.3)
       mediawiki_api (~> 0.7)
       rest-client (~> 2.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    daff (1.3.19)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
+    everypolitician-daff (1.3.26)
     faraday (0.13.0)
       multipart-post (>= 1.2, < 3)
     faraday-cookie_jar (0.0.6)
