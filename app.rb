@@ -24,12 +24,7 @@ get '/prompter/?' do
 
   diff_output_generator = CompareWithWikidata::DiffOutputGenerator.new(
     mediawiki_site: mediawiki_site,
-    page_title: page_title,
-    header_template: params[:header_template],
-    footer_template: params[:footer_template],
-    row_added_template: params[:row_added_template],
-    row_removed_template: params[:row_removed_template],
-    row_modified_template: params[:row_modified_template]
+    page_title: page_title
   )
 
   begin
