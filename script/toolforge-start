@@ -12,4 +12,5 @@ export PATH="$HOME/ruby-2.4.1/bin:$PATH"
 bundle install --deployment --without development test --path vendor -j 3
 
 # Start the rack server
-RACK_ENV=production ./script/server
+export RACK_ENV=production
+exec ./script/server
