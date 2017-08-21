@@ -20,6 +20,10 @@ get '/prompter/?' do
   mediawiki_site = params[:mediawiki_site]
   page_title = params[:page_title]
 
+  unless mediawiki_site =~ /^(www\.)?wikidata.org|[a-z]{2}.wikipedia.org$/
+    halt "Disallowed mediawiki_site"
+  end
+
   halt "Please provide ?mediawiki_site and ?page_title GET parameters" unless mediawiki_site && page_title
 
   diff_output_generator = CompareWithWikidata::DiffOutputGenerator.new(
@@ -35,6 +39,5 @@ get '/prompter/?' do
     halt "Error: #{e.message}"
   end
 
-  # FIXME: This should probably use something more robust than string interpolation
   redirect("https://#{mediawiki_site}/wiki/#{page_title}")
 end
