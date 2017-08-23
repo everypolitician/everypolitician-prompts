@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+require 'bundler/setup'
+require_relative '../lib/load_environment_from_yaml'
+
+require 'compare_with_wikidata'
+require 'mediawiki_api'
+
+WIKI_SITE = 'www.wikidata.org'
+WIKI_USERNAME = ENV['WIKI_USERNAME']
+WIKI_PASSWORD = ENV['WIKI_PASSWORD']
+WIKI_TEMPLATE_NAME = 'Template:Compare Wikidata with CSV'.freeze
+
+client = MediawikiApi::Client.new("https://#{WIKI_SITE}/w/api.php")
+result = client.log_in(WIKI_USERNAME, WIKI_PASSWORD)
+abort "MediawikiApi::Client#log_in failed: #{result}" unless result['result'] == 'Success'
+
+result = client.action(:query, list: 'embeddedin', eititle: WIKI_TEMPLATE_NAME, eilimit: 500)
+abort "Failed to find pages embedding #{WIKI_TEMPLATE_NAME}" unless result.success?
+
+result.data['embeddedin'].map { |ei| ei['title'] }.each do |title|
+  puts "  Updating #{title}"
+
+  diff_output_generator = CompareWithWikidata::DiffOutputGenerator.new(
+    mediawiki_site: WIKI_SITE,
+    page_title: title
+  )
+
+  begin
+    diff_output_generator.run!
+  rescue => e
+    warn "Error updating #{title}: #{e.message}"
+  end
+end
