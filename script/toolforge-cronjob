@@ -8,6 +8,11 @@ cd "$(dirname "$0")/.."
 # Add custom Ruby version to PATH
 export PATH="$HOME/ruby-2.4.1/bin:$PATH"
 
+# Prevent "invalid byte sequence in US-ASCII" error
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # Install latest dependencies
 bundle install --deployment --without development test --path vendor -j 3
 
