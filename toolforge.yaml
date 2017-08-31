@@ -1,0 +1,90 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: 2017-08-25T13:07:25Z
+  generation: 4
+  labels:
+    name: prompter
+    tools.wmflabs.org/webservice: "true"
+    tools.wmflabs.org/webservice-version: "1"
+  name: prompter
+  namespace: prompter
+  resourceVersion: "167193318"
+  selfLink: /apis/extensions/v1beta1/namespaces/prompter/deployments/prompter
+  uid: 56a7a110-8996-11e7-a8af-fa163edef48a
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: prompter
+      tools.wmflabs.org/webservice: "true"
+      tools.wmflabs.org/webservice-version: "1"
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: prompter
+        tools.wmflabs.org/webservice: "true"
+        tools.wmflabs.org/webservice-version: "1"
+    spec:
+      containers:
+      - command:
+        - /usr/bin/webservice-runner
+        - --type
+        - generic
+        - --port
+        - "8000"
+        - --extra_args
+        - /data/project/prompter/prompter/script/toolforge-start
+        env:
+        - name: HOME
+          value: /data/project/prompter/
+        image: docker-registry.tools.wmflabs.org/toollabs-ruby-web:latest
+        imagePullPolicy: Always
+        name: webservice
+        ports:
+        - containerPort: 8000
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "2"
+            memory: 2Gi
+          requests:
+            cpu: 125m
+            memory: 256Mi
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+        - mountPath: /public/dumps/
+          name: dumps
+        - mountPath: /data/project/
+          name: home
+        - mountPath: /data/scratch/
+          name: scratch
+        workingDir: /data/project/prompter/
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /public/dumps/
+        name: dumps
+      - hostPath:
+          path: /data/project/
+        name: home
+      - hostPath:
+          path: /data/scratch/
+        name: scratch
+status:
+  availableReplicas: 1
+  observedGeneration: 4
+  replicas: 1
+  updatedReplicas: 1
