@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/everypolitician/compare_with_wikidata
-  revision: 8e50f4da3b3ec58d0c20c69220216d2725880c12
+  revision: 578e5b77a8d7418c1636a9aa1c33ccdb121d3ddb
   branch: master
   specs:
     compare_with_wikidata (0.1.0)
